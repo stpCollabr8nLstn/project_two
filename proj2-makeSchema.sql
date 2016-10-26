@@ -77,7 +77,6 @@ CREATE TABLE branch
   zipCode number(5)
 );
 
-
 CREATE TABLE property
 (propertyId varchar2(10) primary key not null,
 rentalOrSale varchar2(1) constraint ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) not null,
@@ -94,57 +93,4 @@ hoaCost number(10,2),
 onSiteParking varchar2(1) constraint ck_onSiteParking CHECK (onSiteParking IN ('y','n')) not null,
 numBedrooms int,
 numBathrooms int
-);
-
-
-
-
-
-
-
-
-CREATE TABLE client
-( clientId varchar2(10) PRIMARY KEY not null,
-  email varchar2(50) not null,
-  name varchar2(100),
-  street varchar2(100),
-  city varchar2(25),
-  zipCode number(5)
-);
-
-### above this works
-
-### below this needs datatypes set
-
-CREATE TABLE clientType
-( clientId varchar2(10) REFERENCES client (clientId),
-  clientTypeId varchar2(10),
-  rentalContract varchar2(1),
-  amenities varchar2(1000),
-  minPrice number(20,2),
-  maxPrice number(20,2)
-);
-
-CREATE TABLE clientBuyerLocation
-( clientId varchar2(10) REFERENCES client (clientId),
-  street varchar2(100),
-  city varchar2(25),
-  zipCode number(5)
-);
-
-CREATE TABLE clientPhone
-( clientId varchar2(10) REFERENCES client (clientId),
-  phone varchar2(12)
-);
-
-CREATE TABLE hasA
-( clientId varchar2(10) REFERENCES client (clientId),
-  branchId varchar2(50) REFERENCES branch (branchId)
-);
-
-CREATE TABLE branch
-( branchId varchar2(10) PRIMARY KEY not null,
-  street varchar2(100),
-  city varchar2(25),
-  zipCode number(5)
 );
