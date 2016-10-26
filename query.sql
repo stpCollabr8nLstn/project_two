@@ -43,3 +43,21 @@ CREATE TABLE client
   city varchar2(25),
   zipCode numeric(5)
 );
+
+CREATE TABLE property
+(propertyId varchar2(10) primary key not null,
+rentalOrSale varchar2(1) constraint ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) not null,
+propertyType varchar2(20) constraint ck_propertyType CHECK (propertyType IN ('House','Apartments','Condominium','Townhomes','Manufactured','Lots')) not null,
+adDate date,
+adCost number(10,2),
+adPublication varchar2(100),
+street varchar2(100) not null,
+city varchar2(25) not null,
+zipCode int,
+listingPrice number(10,2),
+listingDate date,
+hoaCost number(10,2),
+onSiteParking varchar2(1) constraint ck_onSiteParking CHECK (onSiteParking IN ('y','n')) not null,
+numBedrooms int,
+numBathrooms int
+);
