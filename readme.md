@@ -21,7 +21,7 @@
 </tr>
 <td>10/31/16</td>
 <td>Mark<br /></td>
-<td>8am-10am</td>
+<td>8am-10am, 1pm-2:30pm</td>
 <td>
   Created some of the insert SQL - branches, staff members and properties.
 </td>

@@ -126,13 +126,14 @@ CREATE TABLE offersMade (
   offerId VARCHAR2(10) PRIMARY KEY NOT NULL,
   offerDate DATE NOT NULL,
   offerPrice NUMBER(10,2),
-  acceptedOrRejected VARCHAR2(8),
+  acceptedOrRejected VARCHAR2(8) CONSTRAINT ck_offersMade CHECK (acceptedOrRejected IN ('accepted','rejected')),
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
 );
 
 CREATE TABLE owns (
-  clientId VARCHAR2(10) PRIMARY KEY NOT NULL,
-  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+  clientId VARCHAR2(10) REFERENCES client(clientId) NOT NULL,
+  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL,
+  PRIMARY KEY (staffId, phone)
 );
 
 CREATE TABLE client (
@@ -238,9 +239,9 @@ insert into property values ('p000000002', 'r', 'Lots', '893 Crimson Ln', 'Austi
 insert into property values ('p000000003', 'r', 'Manufactured', '234 Ivory Cozy Ln', 'Walnut Grove', 56180, 6000000, '09-DEC-14', 'b000000003');
 insert into property values ('p000000004', 'r', 'Townhomes', '3792 Ledge Cozy Ln', 'Bryn Mawr', 19010, 900000, '11-APR-15', 'b000000001');
 insert into property values ('p000000005', 'r', 'Condominium', '324 Holly Ln', 'Virginia City', 89440, 850000, '20-FEB-16', 'b000000002');
-insert into property values ('p000000006', 'r', 'Apartments', '782 Island Ln', 'Los Angeles', 90071, 10000000, '11-NOV-15', 'b000000003');
-insert into property values ('p000000007', 'r', 'House', '325 Meadow Ln', 'Evening Shade', 72532, 3000000, '18-OCT-16', 'b000000001');
-insert into property values ('p000000008', 'r', 'Condominium', '3243 Lamb Ln', 'Miami', 33162, 2000000, '02-APR-15', 'b000000002');
+insert into property values ('p000000006', 's', 'Apartments', '782 Island Ln', 'Los Angeles', 90071, 10000000, '11-NOV-15', 'b000000003');
+insert into property values ('p000000007', 's', 'House', '325 Meadow Ln', 'Evening Shade', 72532, 3000000, '18-OCT-16', 'b000000001');
+insert into property values ('p000000008', 's', 'Condominium', '3243 Lamb Ln', 'Miami', 33162, 2000000, '02-APR-15', 'b000000002');
 insert into property values ('p000000009', 's', 'House', '324 Leaf Ln', 'Plano', 75094, 3000000, '17-APR-16', 'b000000003');
 insert into property values ('p000000010', 's', 'House', '703 Orchard Ln', 'Los Angeles', 90046, 2000000, '25-JUN-16', 'b000000001');
 insert into property values ('p000000011', 's', 'Manufactured', '324 Fox Ln', 'Washington DC', 20006, 1000000, '16-APR-15', 'b000000002');
@@ -249,41 +250,79 @@ insert into property values ('p000000013', 's', 'Condominium', '325 Pine Ln', 'C
 insert into property values ('p000000014', 's', 'Condominium', '832 Pioneer Ln', 'East Setauket,', 11733, 750000, '21-MAY-16', 'b000000002');
 insert into property values ('p000000015', 's', 'House', '293 Rock Ln', 'Lake Forest', 60045, 3000000, '22-FEB-15', 'b000000001');
 
-insert into listedBy values ('s000000001', 'p000000001');
-insert into listedBy values ('s000000002', 'p000000002');
-insert into listedBy values ('s000000003', 'p000000003');
-insert into listedBy values ('s000000004', 'p000000004');
-insert into listedBy values ('s000000005', 'p000000005');
-insert into listedBy values ('s000000001', 'p000000006');
-insert into listedBy values ('s000000002', 'p000000007');
+insert into listedBy values ('s000000004', 'p000000008');
+insert into listedBy values ('s000000003', 'p0000000010');
+insert into listedBy values ('s000000004', 'p0000000011');
+insert into listedBy values ('s000000005', 'p000000012');
+insert into listedBy values ('s000000001', 'p000000013');
+insert into listedBy values ('s000000002', 'p000000014');
+insert into listedBy values ('s000000003', 'p000000015');
 
 insert into advertisement values ('a000000001', '17-APR-16', 1000, 'Real Estate Today', 'p000000001');
 insert into advertisement values ('a000000002', '13-JAN-16', 2000, 'coolhouses.com', 'p000000002');
 insert into advertisement values ('a000000003', '20-AUG-16', 3000, 'Weekly Real Estate', 'p000000003');
 
-insert into propertyStatistics values ('s000000001', 2, 200, 3, 'y', 1970, 'p000000001');
-insert into propertyStatistics values ('s000000002', 3, 300, 2, 'y', 1980, 'p000000002');
-insert into propertyStatistics values ('s000000003', 1, 400, 1, 'y', 1975, 'p000000003');
-insert into propertyStatistics values ('s000000004', 3, 500, 3, 'y', 1972, 'p000000004');
-insert into propertyStatistics values ('s000000005', 2, 100, 4, 'y', 1981, 'p000000005');
-insert into propertyStatistics values ('s000000006', 1, 400, 3, 'n', 1985, 'p000000006');
-insert into propertyStatistics values ('s000000007', 1, 600, 2, 'n', 2010, 'p000000007');
-insert into propertyStatistics values ('s000000008', 2, 200, 1, 'n', 2000, 'p000000008');
-insert into propertyStatistics values ('s000000009', 1, 100, 3, 'n', 1965, 'p000000009');
-insert into propertyStatistics values ('s000000010', 2, 170, 2, 'n', 1960, 'p000000010');
-insert into propertyStatistics values ('s000000011', 1, 105, 3, 'n', 2001, 'p000000011');
-insert into propertyStatistics values ('s000000012', 1, 205, 2, 'n', 2010, 'p000000012');
-insert into propertyStatistics values ('s000000013', 2, 250, 1, 'n', 2007, 'p000000013');
-insert into propertyStatistics values ('s000000014', 1, 700, 3, 'n', 1965, 'p000000014');
-insert into propertyStatistics values ('s000000015', 2, 203, 2, 'n', 1980, 'p000000015');
+insert into propertyStatistics values ('ps00000001', 2, 200, 1, 'y', 1979, 'p000000001');
+insert into propertyStatistics values ('ps00000002', 3, 300, 2, 'y', 1980, 'p000000002');
+insert into propertyStatistics values ('ps00000003', 1, 400, 1, 'y', 1975, 'p000000003');
+insert into propertyStatistics values ('ps00000004', 3, 500, 3, 'y', 1972, 'p000000004');
+insert into propertyStatistics values ('ps00000005', 2, 100, 4, 'y', 1981, 'p000000005');
+insert into propertyStatistics values ('ps00000006', 1, 400, 3, 'n', 1985, 'p000000006');
+insert into propertyStatistics values ('ps00000007', 1, 600, 2, 'n', 2010, 'p000000007');
+insert into propertyStatistics values ('ps00000008', 2, 200, 1, 'n', 2000, 'p000000008');
+insert into propertyStatistics values ('ps00000009', 1, 100, 3, 'n', 1965, 'p000000009');
+insert into propertyStatistics values ('ps00000010', 2, 170, 2, 'n', 1960, 'p000000010');
+insert into propertyStatistics values ('ps00000011', 1, 105, 3, 'n', 2001, 'p000000011');
+insert into propertyStatistics values ('ps00000012', 1, 205, 2, 'n', 2010, 'p000000012');
+insert into propertyStatistics values ('ps00000013', 2, 250, 1, 'n', 2007, 'p000000013');
+insert into propertyStatistics values ('ps00000014', 1, 700, 3, 'n', 1965, 'p000000014');
+insert into propertyStatistics values ('ps00000015', 2, 203, 2, 'n', 1980, 'p000000015');
 
+insert into openHouse values ('oh00000001', '20-DEC-16', '12:00', 'realestate.com', 'p000000001');
+insert into openHouse values ('oh00000002', '15-NOV-16', '13:00', 'Real Estate Daily', 'p000000002');
+insert into openHouse values ('oh00000003', '03-JAN-17', '14:00', 'Best Houses In Town', 'p000000003');
 
-  CREATE TABLE propertyStatistics (
-    statsId VARCHAR2(10) PRIMARY KEY NOT NULL,
-    numBedrooms INT,
-    hoaCost NUMBER(10,2),
-    numBathrooms INT,
-    onSiteParking VARCHAR2(1) CONSTRAINT ck_onSiteParking CHECK (onSiteParking IN ('y','n')) NOT NULL,
-    yearBuilt INT,
-    propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
-  );
+insert into offersMade values ('om00000001', '15-NOV-15', 3000000, 'accepted', 'p000000006');
+insert into offersMade values ('om00000002', '20-SEP-16', 400000, 'accepted', 'p000000007');
+insert into offersMade values ('om00000003', '01-JUN-16', 750000, 'accepted', 'p000000008');
+insert into offersMade values ('om00000004', '15-MAY-16', 555000, 'accepted', 'p000000009');
+insert into offersMade values ('om00000005', '03-MAR-16', 600000, 'accepted', 'p000000010');
+insert into offersMade values ('om00000006', '10-JUN-16', 100000, 'rejected', 'p000000001');
+insert into offersMade values ('om00000007', '17-MAR-16', 200000, 'rejected', 'p000000002');
+
+insert into client values ('c000000001', 'pablo@gmail.com', 'Pablo Picasso', '6649 N Blue Gum St', 'New Orleans', 70116);
+insert into client values ('c000000002', 'vincent@gmail.com', 'Vincent van Gogh', '4 B Blue Ridge Blvd', 'Brighton', 48116);
+insert into client values ('c000000003', 'salvador@gmail.com', 'Salvador Dali', '8 W Cerritos Ave #54', 'Bridgeport', 80140);
+insert into client values ('c000000004', 'frida@gmail.com', 'Frida Kahlo', '639 Main St', 'Anchorage', 99501);
+insert into client values ('c000000005', 'andy@gmail.com', 'Andy Warhol', '34 Center St', 'Hamilton', 45011);
+insert into client values ('c000000006', 'claude@gmail.com', 'Claude Monet', '3 Mcauley Dr', 'Ashland', 44805);
+insert into client values ('c000000007', 'leonardo@gmail.com', 'Leonardo da Vinci', '7 Eads St', 'Chicago', 60632);
+insert into client values ('c000000008', 'jackson@gmail.com', 'Jackson Pollock', '7 W Jackson Blvd', 'San Jose', 95111);
+insert into client values ('c000000009', 'henri@gmail.com', 'Henri Matisse', '5 Boston Ave #88', 'Sioux Falls', 57105);
+insert into client values ('c000000010', 'michelangelo@gmail.com', 'Michelangelo', '228 Runamuck Pl #2808', 'Baltimore', 21224);
+insert into client values ('c000000011', 'georgia@gmail.com', 'Georgia O''Keeffe', '2371 Jerrold Ave', 'Kulpsville', 19443);
+insert into client values ('c000000012', 'paul@gmail.com', 'Paul Cezanne', '37275 St  Rt 17m M', 'Middle Island', 11953);
+insert into client values ('c000000013', 'wassily@gmail.com', 'Wassily Kandinsky', '25 E 75th St #69', 'Los Angeles', 90034);
+insert into client values ('c000000014', 'pierre-auguste@gmail.com', 'Pierre-Auguste Renoir', '98 Connecticut Ave Nw', 'Chagrin Falls', 44023);
+insert into client values ('c000000015', 'gustav@gmail.com', 'Gustav Klimt', '56 E Morehead St', 'Laredo', 78045);
+insert into clientPhone values ('c000000001', '512-324-3152');
+insert into clientPhone values ('c000000001', '800-342-4634');
+insert into clientPhone values ('c000000002', '800-532-6553');
+insert into clientPhone values ('c000000002', '215-438-6432');
+insert into clientPhone values ('c000000003', '215-326-6446');
+insert into clientPhone values ('c000000004', '610-654-7654');
+insert into clientPhone values ('c000000005', '212-654-5711');
+insert into clientPhone values ('c000000005', '610-764-6542');
+insert into clientPhone values ('c000000006', '303-424-6532');
+insert into clientPhone values ('c000000006', '212-643-5542');
+insert into clientPhone values ('c000000007', '404-765-6664');
+insert into clientPhone values ('c000000008', '512-221-2462');
+insert into clientPhone values ('c000000009', '800-536-6542');
+insert into clientPhone values ('c000000009', '303-653-3461');
+insert into clientPhone values ('c000000010', '215-653-6531');
+insert into clientPhone values ('c000000010', '404-653-6526');
+insert into clientPhone values ('c000000011', '610-775-4163');
+insert into clientPhone values ('c000000012', '212-642-4264');
+insert into clientPhone values ('c000000013', '303-462-7245');
+insert into clientPhone values ('c000000014', '404-632-4324');
+insert into clientPhone values ('c000000015', '512-366-6421');
