@@ -1,3 +1,24 @@
+DROP TABLE staffMember;
+DROP TABLE staffPhone;
+DROP TABLE staffAddress;
+DROP TABLE sellingAgent;
+DROP TABLE listingAgent;
+DROP TABLE listedBy;
+DROP TABLE property;
+DROP TABLE advertisement;
+DROP TABLE propertyStatistics;
+DROP TABLE openHouse;
+DROP TABLE offersMade;
+DROP TABLE owns;
+DROP TABLE client;
+DROP TABLE clientPhone;
+DROP TABLE buyer;
+DROP TABLE buyerLocation;
+DROP TABLE renter;
+DROP TABLE owner;
+DROP TABLE hasA;
+DROP TABLE branch;
+
 CREATE TABLE branch (
   branchId VARCHAR2(10) PRIMARY KEY NOT NULL,
   street VARCHAR2(100),
@@ -138,3 +159,9 @@ CREATE TABLE hasA (
   branchId VARCHAR2(10) REFERENCES branch(branchId),
   PRIMARY KEY (clientId, branchId)
 );
+
+insert into branch values ('b00000001', '123 Redwood Ln', 'Los Angeles', 90001);
+insert into branch values ('b00000002', '2001 Braker Ln', 'Austin', 78757);
+insert into branch values ('b00000003', '108 Candlestick Rd', 'Levittown', 19057);
+
+-insert into staffMember values ('s00000001', 'Janis Joplin', 'janis@aol.com', 5, 40000, 'b00000001');
