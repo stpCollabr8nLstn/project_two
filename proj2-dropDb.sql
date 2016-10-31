@@ -1,0 +1,17 @@
+DROP TABLE staffPhone;
+DROP TABLE staffAddress;
+DROP TABLE sellingAgent;
+DROP TABLE listingAgent;
+DROP TABLE listedBy;
+DROP TABLE clientType;
+DROP TABLE clientBuyerLocation;
+DROP TABLE clientPhone;
+DROP TABLE hasA;
+DROP TABLE propertyStats;
+DROP TABLE ad;
+DROP TABLE offer;
+DROP TABLE openHouse;
+DROP TABLE staffmember;
+DROP TABLE client;
+DROP TABLE property;
+DROP TABLE branch;
