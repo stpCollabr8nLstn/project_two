@@ -6,38 +6,6 @@ set termout on
 set feedback on
 prompt Building real estate database.  Please wait ...
 
-
-DROP TABLE staffMember;
-DROP TABLE staffPhone;
-DROP TABLE staffAddress;
-DROP TABLE sellingAgent;
-DROP TABLE listingAgent;
-DROP TABLE listedBy;
-DROP TABLE property;
-DROP TABLE advertisement;
-DROP TABLE propertyStatistics;
-DROP TABLE openHouse;
-DROP TABLE offersMade;
-DROP TABLE owns;
-DROP TABLE client;
-DROP TABLE clientPhone;
-DROP TABLE buyer;
-DROP TABLE buyerLocation;
-DROP TABLE renter;
-DROP TABLE owner;
-DROP TABLE hasA;
-DROP TABLE branch;
-
-DROP TABLE staffMember;
-DROP TABLE client;
-DROP TABLE property;
-DROP TABLE branch;
-
-
-
-
-
-
 CREATE TABLE branch (
   branchId VARCHAR2(10) PRIMARY KEY NOT NULL,
   street VARCHAR2(100),
@@ -55,7 +23,7 @@ CREATE TABLE staffMember (
 );
 
 CREATE TABLE staffPhone (
-  staffId VARCHAR2(10) REFERENCES StaffMember(staffId),
+  staffId VARCHAR2(10) REFERENCES staffMember(staffId),
   phone VARCHAR2(12) NOT NULL,
   PRIMARY KEY (staffId, phone)
 );
@@ -130,12 +98,6 @@ CREATE TABLE offersMade (
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
 );
 
-CREATE TABLE owns (
-  clientId VARCHAR2(10) REFERENCES client(clientId) NOT NULL,
-  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL,
-  PRIMARY KEY (staffId, phone)
-);
-
 CREATE TABLE client (
   clientId VARCHAR2(10) PRIMARY KEY NOT NULL,
   email VARCHAR2(50) NOT NULL,
@@ -143,6 +105,12 @@ CREATE TABLE client (
   street VARCHAR2(100),
   city VARCHAR2(25),
   zipCode NUMBER(5)
+);
+
+CREATE TABLE owns (
+  clientId VARCHAR2(10) REFERENCES client(clientId) NOT NULL,
+  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL,
+  PRIMARY KEY (clientId, propertyId)
 );
 
 CREATE TABLE clientPhone (
@@ -251,8 +219,8 @@ insert into property values ('p000000014', 's', 'Condominium', '832 Pioneer Ln',
 insert into property values ('p000000015', 's', 'House', '293 Rock Ln', 'Lake Forest', 60045, 3000000, '22-FEB-15', 'b000000001');
 
 insert into listedBy values ('s000000004', 'p000000008');
-insert into listedBy values ('s000000003', 'p0000000010');
-insert into listedBy values ('s000000004', 'p0000000011');
+insert into listedBy values ('s000000003', 'p000000010');
+insert into listedBy values ('s000000004', 'p000000011');
 insert into listedBy values ('s000000005', 'p000000012');
 insert into listedBy values ('s000000001', 'p000000013');
 insert into listedBy values ('s000000002', 'p000000014');
