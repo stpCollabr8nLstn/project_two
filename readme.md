@@ -23,7 +23,7 @@
 <td>Mark<br /></td>
 <td>8am-10am, 1pm-2:30pm</td>
 <td>
-  Created some of the insert SQL - branches, staff members and properties.
+  Created some of the insert SQL - branches, staff members, properties, propStats, offers, openHouses and clients
 </td>
 </tr>
 </table>
