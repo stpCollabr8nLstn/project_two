@@ -257,33 +257,8 @@ insert into listedBy values ('s000000005', 'p000000005');
 insert into listedBy values ('s000000001', 'p000000006');
 insert into listedBy values ('s000000002', 'p000000007');
 
-insert into advertisement values ('a000000001', '17-APR-16', 1000, 'Real Estate Today', 'p000000001');
-insert into advertisement values ('a000000002', '13-JAN-16', 2000, 'coolhouses.com', 'p000000002');
-insert into advertisement values ('a000000003', '20-AUG-16', 3000, 'Weekly Real Estate', 'p000000003');
+insert into advertisement values ('a000000001', 'p000000001', '17-APR-16', 1000 'Real Estate Today', 'p000000001');
+insert into advertisement values ('a000000002', 'p000000002', '13-JAN-16', 2000 'coolhouses.com', 'p000000002');
+insert into advertisement values ('a000000003', 'p000000003', '20-AUG-16', 3000 'Weekly Real Estate', 'p000000003');
 
-insert into propertyStatistics values ('s000000001', 2, 200, 3, 'y', 1970, 'p000000001');
-insert into propertyStatistics values ('s000000002', 3, 300, 2, 'y', 1980, 'p000000002');
-insert into propertyStatistics values ('s000000003', 1, 400, 1, 'y', 1975, 'p000000003');
-insert into propertyStatistics values ('s000000004', 3, 500, 3, 'y', 1972, 'p000000004');
-insert into propertyStatistics values ('s000000005', 2, 100, 4, 'y', 1981, 'p000000005');
-insert into propertyStatistics values ('s000000006', 1, 400, 3, 'n', 1985, 'p000000006');
-insert into propertyStatistics values ('s000000007', 1, 600, 2, 'n', 2010, 'p000000007');
-insert into propertyStatistics values ('s000000008', 2, 200, 1, 'n', 2000, 'p000000008');
-insert into propertyStatistics values ('s000000009', 1, 100, 3, 'n', 1965, 'p000000009');
-insert into propertyStatistics values ('s000000010', 2, 170, 2, 'n', 1960, 'p000000010');
-insert into propertyStatistics values ('s000000011', 1, 105, 3, 'n', 2001, 'p000000011');
-insert into propertyStatistics values ('s000000012', 1, 205, 2, 'n', 2010, 'p000000012');
-insert into propertyStatistics values ('s000000013', 2, 250, 1, 'n', 2007, 'p000000013');
-insert into propertyStatistics values ('s000000014', 1, 700, 3, 'n', 1965, 'p000000014');
-insert into propertyStatistics values ('s000000015', 2, 203, 2, 'n', 1980, 'p000000015');
-
-
-  CREATE TABLE propertyStatistics (
-    statsId VARCHAR2(10) PRIMARY KEY NOT NULL,
-    numBedrooms INT,
-    hoaCost NUMBER(10,2),
-    numBathrooms INT,
-    onSiteParking VARCHAR2(1) CONSTRAINT ck_onSiteParking CHECK (onSiteParking IN ('y','n')) NOT NULL,
-    yearBuilt INT,
-    propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
-  );
+insert into propertyStatistics values ('1000000001', 2, 200, 3, 'y', 1970, 'p000000001');
