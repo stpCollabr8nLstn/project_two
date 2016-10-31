@@ -19,4 +19,11 @@
   Fixed ER Diagram to implement professor's recommended changes.  Updated relational diagram, schema and data types.  Created drop table.
 </td>
 </tr>
+<td>10/31/16</td>
+<td>Mark<br /></td>
+<td>8am-10am</td>
+<td>
+  Created some of the insert SQL - branches, staff members and properties.
+</td>
+</tr>
 </table>
