@@ -1,3 +1,12 @@
+--
+--  Creating real estate database
+--
+
+set termout on
+set feedback on
+prompt Building real estate database.  Please wait ...
+
+
 DROP TABLE staffMember;
 DROP TABLE staffPhone;
 DROP TABLE staffAddress;
@@ -18,6 +27,16 @@ DROP TABLE renter;
 DROP TABLE owner;
 DROP TABLE hasA;
 DROP TABLE branch;
+
+DROP TABLE staffMember;
+DROP TABLE client;
+DROP TABLE property;
+DROP TABLE branch;
+
+
+
+
+
 
 CREATE TABLE branch (
   branchId VARCHAR2(10) PRIMARY KEY NOT NULL,
@@ -164,5 +183,24 @@ insert into branch values ('b00000001', '123 Redwood Ln', 'Los Angeles', 90001);
 insert into branch values ('b00000002', '2001 Braker Ln', 'Austin', 78757);
 insert into branch values ('b00000003', '108 Candlestick Rd', 'Levittown', 19057);
 
-insert into staffMember values ('s00000001', 'Jimi Hendrix', 'jimi@aol.com', 3, 20000, 'b00000002');
-insert into staffMember values ('s00000002', 'Janis Joplin', 'janis@aol.com', 5, 40000, 'b00000001');
+insert into staffMember values ('s00000001', 'Jimi Hendrix', 'jimi@aol.com', 3, 20000, 'b00000001');
+insert into staffMember values ('s00000002', 'Janis Joplin', 'janis@aol.com', 5, 40000, 'b00000002');
+insert into staffMember values ('s00000003', 'David Bowie', 'david@aol.com', 4, 30000, 'b00000003');
+insert into staffMember values ('s00000004', 'Carole King', 'carole@aol.com', 2, 2500, 'b00000001');
+insert into staffMember values ('s00000005', 'Joni Mitchell', 'joni@aol.com', 6, 15000, 'b00000002');
+
+insert into staffPhone values ('s00000001', '512-123-1234');
+insert into staffPhone values ('s00000001', '800-123-4567');
+insert into staffPhone values ('s00000002', '215-890-1672');
+insert into staffPhone values ('s00000003', '610-860-7350');
+insert into staffPhone values ('s00000004', '212-612-6790');
+insert into staffPhone values ('s00000004', '303-724-7352');
+insert into staffPhone values ('s00000005', '404-679-3721');
+
+insert into staffAddress values ('s00000001', '763 Eggdrop Ln', 'Los Angeles', 90001);
+insert into staffAddress values ('s00000001', '8632 Expresso Rd', 'Los Angeles', 90001);
+insert into staffAddress values ('s00000002', '9093 Fern Hollow Pl', 'Austin', 78765);
+insert into staffAddress values ('s00000003', '7362 Red Stripe Rd', 'Levittown', 19057);
+insert into staffAddress values ('s00000004', '832 Grumpy Cat Rd', 'Los Angeles', 90001);
+insert into staffAddress values ('s00000004', '7321 Github Rd', 'Los Angeles', 90001);
+insert into staffAddress values ('s00000005', '873 Guitar Ln', 'Austin', 78757);
