@@ -164,4 +164,4 @@ insert into branch values ('b00000001', '123 Redwood Ln', 'Los Angeles', 90001);
 insert into branch values ('b00000002', '2001 Braker Ln', 'Austin', 78757);
 insert into branch values ('b00000003', '108 Candlestick Rd', 'Levittown', 19057);
 
-insert into staffMember values ('s00000001', 'Janis Joplin', 'janis@aol.com', 5, 40000, 'b00000001');
+-insert into staffMember values ('s00000001', 'Janis Joplin', 'janis@aol.com', 5, 40000, 'b00000001');
