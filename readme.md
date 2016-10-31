@@ -21,7 +21,7 @@
 </tr>
 <td>10/31/16</td>
 <td>Mark<br /></td>
-<td>8am-10am, 1pm-2:30pm, 3:30-?</td>
+<td>8am-10am, 1pm-2:30pm, 3:30-3:45</td>
 <td>
   Created some of the insert SQL - branches, staff members, properties, propStats, offers, openHouses and clients
 </td>
