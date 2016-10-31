@@ -1,96 +1,120 @@
-CREATE TABLE StaffMember (
-staffId VarChar2(10) 	PRIMARY KEY,
-name VarChar2(100)	    NOT NULL,
-email VarChar2(50)	    UNIQUE NOT NULL,
-rating Number (1),
-salary Number (7, 2)	NOT NULL,
-branchId VarChar2(10)
+CREATE TABLE staffMember (
+  staffId VARCHAR2(10)  PRIMARY KEY,
+  name VARCHAR2(100) NOT NULL,
+  email VARCHAR2(50) UNIQUE NOT NULL,
+  rating NUMBER (1),
+  salary NUMBER (7, 2) NOT NULL,
+  branchId VARCHAR2(10)
 );
 
 CREATE TABLE staffPhone (
-staffId VarChar2(10)	REFERENCES StaffMember(staffId),
-phone VarChar2(12)	    NOT NULL
+  staffId VARCHAR2(10) REFERENCES StaffMember(staffId),
+  phone VARCHAR2(12) NOT NULL
 );
 
 CREATE TABLE staffAddress (
-staffId VarChar2(10)	REFERENCES StaffMember(staffId),
-street VarChar2(100),
-city VarChar2(25),
-zipCode Number(5)
+  staffId VARCHAR2(10) REFERENCES StaffMember(staffId),
+  street VARCHAR2(100),
+  city VARCHAR2(25),
+  zipCode NUMBER(5)
 );
 
 CREATE TABLE sellingAgent (
-staffId VarChar2(10)	PRIMARY KEY REFERENCES StaffMember(staffId),
-sellingAgentCommission Number (7, 2)
+  staffId VARCHAR2(10) PRIMARY KEY REFERENCES StaffMember(staffId),
+  sellingAgentCommission NUMBER (7, 2)
 );
 
 CREATE TABLE listingAgent (
-staffId VarChar2(10)	PRIMARY KEY REFERENCES StaffMember(staffId),
-listingAgentCommission Number (7, 2)
+  staffId VARCHAR2(10) PRIMARY KEY REFERENCES StaffMember(staffId),
+  listingAgentCommission NUMBER (7, 2)
 );
 
 CREATE TABLE listedBy (
-staffId VarChar2(10)	REFERENCES StaffMember(staffId),
-propertyId VarChar2(10),
-PRIMARY KEY (staffId, propertyID)
+  staffId VARCHAR2(10) REFERENCES StaffMember(staffId),
+  propertyId VARCHAR2(10),
+  PRIMARY KEY (staffId, propertyID)
 );
 
-CREATE TABLE client
-( clientId varchar2(10) PRIMARY KEY not null,
-  email varchar2(50) not null,
-  name varchar2(100),
-  street varchar2(100),
-  city varchar2(25),
-  zipCode numeric(5)
+CREATE TABLE client (
+  clientId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  email VARCHAR2(50) NOT NULL,
+  name VARCHAR2(100),
+  street VARCHAR2(100),
+  city VARCHAR2(25),
+  zipCode NUMERIC(5)
 );
 
-CREATE TABLE clientType
-( clientId varchar2(10) REFERENCES client (clientId),
-  clientTypeId varchar2(10),
-  rentalContract varchar2(1),
-  amenities varchar2(1000),
-  minPrice number(20,2),
-  maxPrice number(20,2)
+CREATE TABLE clientType (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  clientTypeId VARCHAR2(10),
+  rentalContract VARCHAR2(1),
+  amenities VARCHAR2(1000),
+  minPrice NUMBER(20,2),
+  maxPrice NUMBER(20,2)
 );
 
-CREATE TABLE clientBuyerLocation
-( clientId varchar2(10) REFERENCES client (clientId),
-  street varchar2(100),
-  city varchar2(25),
-  zipCode number(5)
+CREATE TABLE clientBuyerLocation (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  street VARCHAR2(100),
+  city VARCHAR2(25),
+  zipCode NUMBER(5)
 );
 
-CREATE TABLE clientPhone
-( clientId varchar2(10) REFERENCES client (clientId),
-  phone varchar2(12)
+CREATE TABLE clientPhone (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  phone VARCHAR2(12)
 );
 
-CREATE TABLE hasA
-( clientId varchar2(10) REFERENCES client (clientId),
-  branchId varchar2(50) REFERENCES branch (branchId)
+CREATE TABLE branch (
+  branchId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  street VARCHAR2(100),
+  city VARCHAR2(25),
+  zipCode NUMBER(5)
+);
+CREATE TABLE hasA (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  branchId VARCHAR2(10) REFERENCES branch(branchId)
 );
 
-CREATE TABLE branch
-( branchId varchar2(10) PRIMARY KEY not null,
-  street varchar2(100),
-  city varchar2(25),
-  zipCode number(5)
+CREATE TABLE property (
+  propertyId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  rentalOrSale VARCHAR2(1) CONSTRAINT ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) NOT NULL,
+  propertyType VARCHAR2(20) CONSTRAINT ck_propertyType CHECK (propertyType IN ('House','Apartments','Condominium','Townhomes','Manufactured','Lots')) NOT NULL,
+  street VARCHAR2(100) NOT NULL,
+  city VARCHAR2(25) NOT NULL,
+  zipCode INT,
+  listingPrice NUMBER(10,2),
+  listingDate DATE,
+  branch VARCHAR2(10) REFERENCES branch(branchId) NOT NULL
+);
+CREATE TABLE propertyStats (
+  statsId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  hoaCost NUMBER(10,2),
+  onSiteParking VARCHAR2(1) CONSTRAINT ck_onSiteParking CHECK (onSiteParking IN ('y','n')) NOT NULL,
+  numBedrooms INT,
+  numBathrooms INT,
+  yearBuilt INT,
+  property VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
 );
 
-CREATE TABLE property
-(propertyId varchar2(10) primary key not null,
-rentalOrSale varchar2(1) constraint ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) not null,
-propertyType varchar2(20) constraint ck_propertyType CHECK (propertyType IN ('House','Apartments','Condominium','Townhomes','Manufactured','Lots')) not null,
-adDate date,
-adCost number(10,2),
-adPublication varchar2(100),
-street varchar2(100) not null,
-city varchar2(25) not null,
-zipCode int,
-listingPrice number(10,2),
-listingDate date,
-hoaCost number(10,2),
-onSiteParking varchar2(1) constraint ck_onSiteParking CHECK (onSiteParking IN ('y','n')) not null,
-numBedrooms int,
-numBathrooms int
+CREATE TABLE ad (
+  adId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  adDate DATE,
+  adCost NUMBER(10,2),
+  adPublication VARCHAR2(100),
+  property VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+);
+
+CREATE TABLE offer (
+  offerId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  offerDate DATE NOT NULL,
+  acceptedOrRejected VARCHAR2(8),
+  property VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+);
+
+CREATE TABLE openHouse (
+  openHouseId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  openHouseDate DATE NOT NULL,
+  openHouseTime VARCHAR2(5) NOT NULL,
+  property VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
 );
