@@ -30,7 +30,7 @@
 <tr>
 <td>11/1/16</td>
 <td>Mark<br /></td>
-<td>8am-?</td>
+<td>8-8:45am</td>
 <td>
   Cleaning up, fixing little things on the website - broken links, wrong datatypes, double checking for internal consistency.
 </td>
