@@ -54,13 +54,10 @@ CREATE TABLE listedBy (
 
 CREATE TABLE property (
   propertyId VARCHAR2(10) PRIMARY KEY NOT NULL,
-  rentalOrSale VARCHAR2(1) CONSTRAINT ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) NOT NULL,
   propertyType VARCHAR2(20) CONSTRAINT ck_propertyType CHECK (propertyType IN ('House','Apartments','Condominium','Townhomes','Manufactured','Lots')) NOT NULL,
   street VARCHAR2(100) NOT NULL,
   city VARCHAR2(25) NOT NULL,
   zipCode INT,
-  listingPrice NUMBER(10,2),
-  listingDate DATE,
   branchId VARCHAR2(10) REFERENCES branch(branchId) NOT NULL
 );
 
@@ -96,6 +93,19 @@ CREATE TABLE offersMade (
   offerPrice NUMBER(10,2),
   acceptedOrRejected VARCHAR2(8) CONSTRAINT ck_offersMade CHECK (acceptedOrRejected IN ('accepted','rejected')),
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+);
+
+CREATE TABLE listing (
+  listingId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  listingPrice NUMBER(10,2),
+  listingDate DATE,
+  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+);
+
+CREATE TABLE listingRentalOrSale (
+  listingId VARCHAR2(10) REFERENCES listing(listingId),
+  rentalOrSale VARCHAR2(1) CONSTRAINT ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) NOT NULL,
+  PRIMARY KEY (listingId, rentalOrSale)
 );
 
 CREATE TABLE client (
@@ -202,21 +212,21 @@ insert into staffAddress values ('s000000009', '321 Canyon Rd', 'Los Angeles', 9
 insert into staffAddress values ('s000000009', '937 Chase Rd', 'Los Angeles', 90001);
 insert into staffAddress values ('s000000010', '321 Bear Ln', 'Austin', 78757);
 
-insert into property values ('p000000001', 'r', 'House', '123 Cozy Ln', 'Los Angeles', 90001, 8000000, '01-JAN-16', 'b000000001');
-insert into property values ('p000000002', 'r', 'Lots', '893 Crimson Ln', 'Austin', 78757, 9000000, '03-MAR-15', 'b000000002');
-insert into property values ('p000000003', 'r', 'Manufactured', '234 Ivory Cozy Ln', 'Walnut Grove', 56180, 6000000, '09-DEC-14', 'b000000003');
-insert into property values ('p000000004', 'r', 'Townhomes', '3792 Ledge Cozy Ln', 'Bryn Mawr', 19010, 900000, '11-APR-15', 'b000000001');
-insert into property values ('p000000005', 'r', 'Condominium', '324 Holly Ln', 'Virginia City', 89440, 850000, '20-FEB-16', 'b000000002');
-insert into property values ('p000000006', 's', 'Apartments', '782 Island Ln', 'Los Angeles', 90071, 10000000, '11-NOV-15', 'b000000003');
-insert into property values ('p000000007', 's', 'House', '325 Meadow Ln', 'Evening Shade', 72532, 3000000, '18-OCT-16', 'b000000001');
-insert into property values ('p000000008', 's', 'Condominium', '3243 Lamb Ln', 'Miami', 33162, 2000000, '02-APR-15', 'b000000002');
-insert into property values ('p000000009', 's', 'House', '324 Leaf Ln', 'Plano', 75094, 3000000, '17-APR-16', 'b000000003');
-insert into property values ('p000000010', 's', 'House', '703 Orchard Ln', 'Los Angeles', 90046, 2000000, '25-JUN-16', 'b000000001');
-insert into property values ('p000000011', 's', 'Manufactured', '324 Fox Ln', 'Washington DC', 20006, 1000000, '16-APR-15', 'b000000002');
-insert into property values ('p000000012', 's', 'House', '329 Quay Ln', 'Las Vegas', 89145, 1500000, '13-JUL-16', 'b000000003');
-insert into property values ('p000000013', 's', 'Condominium', '325 Pine Ln', 'Chicago', 60611, 1000000, '03-OCT-11', 'b000000001');
-insert into property values ('p000000014', 's', 'Condominium', '832 Pioneer Ln', 'East Setauket,', 11733, 750000, '21-MAY-16', 'b000000002');
-insert into property values ('p000000015', 's', 'House', '293 Rock Ln', 'Lake Forest', 60045, 3000000, '22-FEB-15', 'b000000001');
+insert into property values ('p000000001', 'House', '123 Cozy Ln', 'Los Angeles', 90001, 'b000000001');
+insert into property values ('p000000002', 'Lots', '893 Crimson Ln', 'Austin', 78757, 'b000000002');
+insert into property values ('p000000003', 'Manufactured', '234 Ivory Cozy Ln', 'Walnut Grove', 90046, 'b000000003');
+insert into property values ('p000000004', 'Townhomes', '3792 Ledge Cozy Ln', 'Bryn Mawr', 78757, 'b000000001');
+insert into property values ('p000000005', 'Condominium', '324 Holly Ln', 'Virginia City', 60611, 'b000000002');
+insert into property values ('p000000006', 'Apartments', '782 Island Ln', 'Los Angeles', 83621, 'b000000003');
+insert into property values ('p000000007', 'House', '325 Meadow Ln', 'Evening Shade', 47291, 'b000000001');
+insert into property values ('p000000008', 'Condominium', '3243 Lamb Ln', 'Miami', 36273, 'b000000002');
+insert into property values ('p000000009', 'House', '324 Leaf Ln', 'Plano', 75094, 'b000000003');
+insert into property values ('p000000010', 'House', '703 Orchard Ln', 'Los Angeles', 90046, 'b000000001');
+insert into property values ('p000000011', 'Manufactured', '324 Fox Ln', 'Washington DC', 20006, 'b000000002');
+insert into property values ('p000000012', 'House', '329 Quay Ln', 'Las Vegas', 89145, 'b000000003');
+insert into property values ('p000000013', 'Condominium', '325 Pine Ln', 'Chicago', 60611, 'b000000001');
+insert into property values ('p000000014', 'Condominium', '832 Pioneer Ln', 'East Setauket,', 60611, 'b000000002');
+insert into property values ('p000000015', 'House', '293 Rock Ln', 'Lake Forest', 60045, 'b000000001');
 
 insert into listedBy values ('s000000004', 'p000000008');
 insert into listedBy values ('s000000003', 'p000000010');

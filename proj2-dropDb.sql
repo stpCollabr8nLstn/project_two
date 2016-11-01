@@ -3,6 +3,8 @@ DROP TABLE staffAddress;
 DROP TABLE sellingAgent;
 DROP TABLE listingAgent;
 DROP TABLE listedBy;
+DROP TABLE listingRentalOrSale;
+DROP TABLE listing;
 DROP TABLE staffMember;
 DROP TABLE advertisement;
 DROP TABLE propertyStatistics;
