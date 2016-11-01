@@ -268,6 +268,25 @@ insert into offersMade values ('om00000005', '03-MAR-16', 600000, 'accepted', 'p
 insert into offersMade values ('om00000006', '10-JUN-16', 100000, 'rejected', 'p000000001');
 insert into offersMade values ('om00000007', '17-MAR-16', 200000, 'rejected', 'p000000002');
 
+insert into listing values ('l000000001', 2000000, '17-MAR-16', 'p000000001');
+insert into listing values ('l000000002', 1000000, '01-JUN-15', 'p000000002');
+insert into listing values ('l000000003', 8000000, '12-DEC-15', 'p000000003');
+insert into listing values ('l000000004', 3500000, '03-MAR-16', 'p000000004');
+insert into listing values ('l000000005', 20000000, '06-AUG-15', 'p000000005');
+insert into listing values ('l000000006', 1500000, '10-JAN-16', 'p000000006');
+insert into listing values ('l000000007', 1750000, '17-JUL-15', 'p000000007');
+
+insert into listingRentalOrSale values ('l000000001', 'r');
+insert into listingRentalOrSale values ('l000000001', 's');
+insert into listingRentalOrSale values ('l000000002', 's');
+insert into listingRentalOrSale values ('l000000003', 'r');
+insert into listingRentalOrSale values ('l000000004', 's');
+insert into listingRentalOrSale values ('l000000004', 'r');
+insert into listingRentalOrSale values ('l000000005', 'r');
+insert into listingRentalOrSale values ('l000000006', 's');
+insert into listingRentalOrSale values ('l000000007', 'r');
+insert into listingRentalOrSale values ('l000000007', 's');
+
 insert into client values ('c000000001', 'pablo@gmail.com', 'Pablo Picasso', '6649 N Blue Gum St', 'New Orleans', 70116);
 insert into client values ('c000000002', 'vincent@gmail.com', 'Vincent van Gogh', '4 B Blue Ridge Blvd', 'Brighton', 48116);
 insert into client values ('c000000003', 'salvador@gmail.com', 'Salvador Dali', '8 W Cerritos Ave #54', 'Bridgeport', 80140);
