@@ -80,11 +80,12 @@ CREATE TABLE propertyStatistics (
 );
 
 CREATE TABLE openHouse (
-  openHouseId VARCHAR2(10) PRIMARY KEY NOT NULL,
+  openHouseId VARCHAR2(10) NOT NULL,
   openHouseDate DATE NOT NULL,
   openHouseTime VARCHAR2(5) NOT NULL,
   adPublication VARCHAR2(100),
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+  PRIMARY KEY (openHouseId, openHouseDate)
 );
 
 CREATE TABLE offersMade (
@@ -125,11 +126,12 @@ CREATE TABLE owns (
 
 CREATE TABLE clientPhone (
   clientId VARCHAR2(10) REFERENCES client (clientId),
-  phone VARCHAR2(12)
+  phone VARCHAR2(12),
+  PRIMARY KEY (clientId, phone)
 );
 
 CREATE TABLE buyer (
-  clientId VARCHAR2(10) REFERENCES client (clientId),
+  clientId VARCHAR2(10) PRIMARY KEY REFERENCES client (clientId),
   minPrice NUMBER(20,2),
   maxPrice NUMBER(20,2),
   amenities VARCHAR2(1000)
@@ -139,16 +141,17 @@ CREATE TABLE buyerLocation (
   clientId VARCHAR2(10) REFERENCES client (clientId),
   street VARCHAR2(100),
   city VARCHAR2(25),
-  zipCode NUMBER(5)
+  zipCode NUMBER(5),
+  PRIMARY KEY (clientId, street)
 );
 
 CREATE TABLE renter (
-  clientId VARCHAR2(10) REFERENCES client (clientId),
+  clientId VARCHAR2(10) PRIMARY KEY REFERENCES client (clientId),
   rentalContract VARCHAR2(4000)
 );
 
 CREATE TABLE owner (
-  clientId VARCHAR2(10) REFERENCES client (clientId),
+  clientId VARCHAR2(10) PRIMARY KEY REFERENCES client (clientId),
   ownerType VARCHAR2(1) CONSTRAINT ck_ownerType CHECK (ownerType IN ('s','r')) NOT NULL
 );
 
