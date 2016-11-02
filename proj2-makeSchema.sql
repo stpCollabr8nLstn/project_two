@@ -22,7 +22,7 @@ DROP TABLE owns                 cascade constraint;
 DROP TABLE clientPhone          cascade constraint;
 DROP TABLE buyer                cascade constraint;
 DROP TABLE buyerLocation        cascade constraint;
-DROP TABLE buyerAmenities       cascade constraint;
+DROP TABLE buyerAmenity       cascade constraint;
 DROP TABLE renter               cascade constraint;
 DROP TABLE owner                cascade constraint;
 DROP TABLE hasA                 cascade constraint;
@@ -168,7 +168,7 @@ CREATE TABLE buyerLocation (
   PRIMARY KEY (clientId, street)
 );
 
-CREATE TABLE buyerAmenities (
+CREATE TABLE buyerAmenity (
   clientId VARCHAR2(10) REFERENCES client (clientId),
   amenity VARCHAR2(100),
   PRIMARY KEY (clientId, amenity)
