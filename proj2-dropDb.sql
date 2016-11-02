@@ -13,7 +13,7 @@ DROP TABLE owns                 cascade constraint;
 DROP TABLE clientPhone          cascade constraint;
 DROP TABLE buyer                cascade constraint;
 DROP TABLE buyerLocation        cascade constraint;
-DROP TABLE buyerAmenity       cascade constraint;
+DROP TABLE buyerAmenity         cascade constraint;
 DROP TABLE renter               cascade constraint;
 DROP TABLE owner                cascade constraint;
 DROP TABLE hasA                 cascade constraint;
