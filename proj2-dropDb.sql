@@ -3,7 +3,6 @@ DROP TABLE staffAddress         cascade constraint;
 DROP TABLE sellingAgent         cascade constraint;
 DROP TABLE listingAgent         cascade constraint;
 DROP TABLE listedBy             cascade constraint;
-DROP TABLE listingRentalOrSale  cascade constraint;
 DROP TABLE listing              cascade constraint;
 DROP TABLE staffMember          cascade constraint;
 DROP TABLE advertisement        cascade constraint;
