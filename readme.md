@@ -20,19 +20,10 @@
 </td>
 </tr>
 <tr>
-<td>10/31/16</td>
-<td>Mark<br /></td>
-<td>8am-10am, 1pm-2:30pm, 3:30-3:45, 6:30-12:00pm</td>
+<td>11/2/16</td>
+<td>Adriana<br />Mark<br />Woodrow</td>
+<td>2-4pm</td>
 <td>
-  Created some of the insert SQL - branches, staff members, properties, propStats, offers, openHouses and clients.  Changed schema so properties can be listed for sale and for rent.  Finished inserts.  Fixed order of table drops.
+  Changed amenities to multivalued attribute.  Changed rentalOrSale to two y/n relations. Created query.
 </td>
 </tr>
-<tr>
-<td>11/1/16</td>
-<td>Mark<br /></td>
-<td>8-8:45am</td>
-<td>
-  Cleaning up, fixing little things on the website - broken links, wrong datatypes, double checking for internal consistency.
-</td>
-</tr>
-</table>
