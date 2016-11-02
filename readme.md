@@ -21,19 +21,12 @@
 	</td>
 </tr>
 <tr>
-	<td>11/1/16</td>
-	<td>Mark<br />Adriana</td>
-	<td>8pm-8:45am<br />8pm-12am</td>
-	<td>
-  	Cleaning up, fixing little things on the website - broken links, wrong datatypes, double checking for internal consistency.
-  	Testing schema, drop script and query.
-	</td>
-</tr>
-<tr>
 	<td>11/2/16</td>
 	<td>Adriana<br />Mark<br />Woodrow</td>
 	<td>2-4pm</td>
 	<td>
   	Changed amenities to multivalued attribute.  Changed rentalOrSale to two y/n relations. Created query.
+  	Cleaning up, fixing little things on the website - broken links, wrong datatypes, double checking for internal consistency.
+  	Testing schema, drop script and query.
 	</td>
 </tr>
