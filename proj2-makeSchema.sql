@@ -22,6 +22,7 @@ DROP TABLE owns                 cascade constraint;
 DROP TABLE clientPhone          cascade constraint;
 DROP TABLE buyer                cascade constraint;
 DROP TABLE buyerLocation        cascade constraint;
+DROP TABLE buyerAmenities       cascade constraint;
 DROP TABLE renter               cascade constraint;
 DROP TABLE owner                cascade constraint;
 DROP TABLE hasA                 cascade constraint;
@@ -156,8 +157,7 @@ CREATE TABLE clientPhone (
 CREATE TABLE buyer (
   clientId VARCHAR2(10) PRIMARY KEY REFERENCES client (clientId),
   minPrice NUMBER(20,2),
-  maxPrice NUMBER(20,2),
-  amenities VARCHAR2(1000)
+  maxPrice NUMBER(20,2)
 );
 
 CREATE TABLE buyerLocation (
@@ -166,6 +166,12 @@ CREATE TABLE buyerLocation (
   city VARCHAR2(25),
   zipCode NUMBER(5),
   PRIMARY KEY (clientId, street)
+);
+
+CREATE TABLE buyerAmenities (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  amenity VARCHAR2(100),
+  PRIMARY KEY (clientId, amenity)
 );
 
 CREATE TABLE renter (
@@ -349,11 +355,16 @@ insert into clientPhone values ('c000000012', '212-642-4264');
 insert into clientPhone values ('c000000013', '303-462-7245');
 insert into clientPhone values ('c000000014', '404-632-4324');
 insert into clientPhone values ('c000000015', '512-366-6421');
-insert into buyer values ('c000000001', 70000, 200000, 'in-ground pool');
-insert into buyer values ('c000000002', 100000, 500000, '');
-insert into buyer values ('c000000003', 1000000, 10000000, 'helicopter pad, batcave');
-insert into buyer values ('c000000004', 60000, 300000, 'porch swing');
-insert into buyer values ('c000000005', 150000, 8000000, 'near beach');
+insert into buyer values ('c000000001', 70000, 200000);
+insert into buyer values ('c000000002', 100000, 500000);
+insert into buyer values ('c000000003', 1000000, 10000000);
+insert into buyer values ('c000000004', 60000, 300000);
+insert into buyer values ('c000000005', 150000, 8000000);
+insert into buyerAmenities values ('c000000001', 'in-ground pool');
+insert into buyerAmenities values ('c000000003', 'helicopter pad');
+insert into buyerAmenities values ('c000000003', 'batcave');
+insert into buyerAmenities values ('c000000004', 'porch swing');
+insert into buyerAmenities values ('c000000005', 'near beach');
 insert into buyerLocation values ('c000000001', '73 State Road 434 E', 'Phoenix', 85013);
 insert into buyerLocation values ('c000000001', '90991 Thorburn Ave', 'New York', 10011);
 insert into buyerLocation values ('c000000002', '426 Wolf St', 'Jefferson', 70002);
