@@ -6,6 +6,29 @@ set termout on
 set feedback on
 prompt Building real estate database.  Please wait ...
 
+DROP TABLE staffPhone           cascade constraint;
+DROP TABLE staffAddress         cascade constraint;
+DROP TABLE sellingAgent         cascade constraint;
+DROP TABLE listingAgent         cascade constraint;
+DROP TABLE listedBy             cascade constraint;
+DROP TABLE listingRentalOrSale  cascade constraint;
+DROP TABLE listing              cascade constraint;
+DROP TABLE staffMember          cascade constraint;
+DROP TABLE advertisement        cascade constraint;
+DROP TABLE propertyStatistics   cascade constraint;
+DROP TABLE openHouse            cascade constraint;
+DROP TABLE offersMade           cascade constraint;
+DROP TABLE owns                 cascade constraint;
+DROP TABLE clientPhone          cascade constraint;
+DROP TABLE buyer                cascade constraint;
+DROP TABLE buyerLocation        cascade constraint;
+DROP TABLE renter               cascade constraint;
+DROP TABLE owner                cascade constraint;
+DROP TABLE hasA                 cascade constraint;
+DROP TABLE client               cascade constraint;
+DROP TABLE property             cascade constraint;
+DROP TABLE branch               cascade constraint;
+
 CREATE TABLE branch (
   branchId VARCHAR2(10) PRIMARY KEY NOT NULL,
   street VARCHAR2(100),
@@ -84,7 +107,7 @@ CREATE TABLE openHouse (
   openHouseDate DATE NOT NULL,
   openHouseTime VARCHAR2(5) NOT NULL,
   adPublication VARCHAR2(100),
-  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL,
   PRIMARY KEY (openHouseId, openHouseDate)
 );
 
