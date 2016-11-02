@@ -129,12 +129,6 @@ CREATE TABLE listing (
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
 );
 
---CREATE TABLE listingRentalOrSale (
-  --listingId VARCHAR2(10) REFERENCES listing(listingId),
-  --rentalOrSale VARCHAR2(1) CONSTRAINT ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) NOT NULL,
-  --PRIMARY KEY (listingId, rentalOrSale)
---);
-
 CREATE TABLE client (
   clientId VARCHAR2(10) PRIMARY KEY NOT NULL,
   email VARCHAR2(50) NOT NULL,
@@ -309,17 +303,6 @@ insert into listing values ('l000000004', 3500000, '03-MAR-16', 'y', 'y', 'p0000
 insert into listing values ('l000000005', 20000000, '06-AUG-15', 'y', 'n', 'p000000005');
 insert into listing values ('l000000006', 1500000, '10-JAN-16', 'n', 'y', 'p000000006');
 insert into listing values ('l000000007', 1750000, '17-JUL-15', 'y', 'y', 'p000000007');
-
---insert into listingRentalOrSale values ('l000000001', 'r');
---insert into listingRentalOrSale values ('l000000001', 's');
---insert into listingRentalOrSale values ('l000000002', 's');
---insert into listingRentalOrSale values ('l000000003', 'r');
---insert into listingRentalOrSale values ('l000000004', 's');
---insert into listingRentalOrSale values ('l000000004', 'r');
---insert into listingRentalOrSale values ('l000000005', 'r');
---insert into listingRentalOrSale values ('l000000006', 's');
---insert into listingRentalOrSale values ('l000000007', 'r');
---insert into listingRentalOrSale values ('l000000007', 's');
 
 insert into client values ('c000000001', 'pablo@gmail.com', 'Pablo Picasso', '6649 N Blue Gum St', 'New Orleans', 70116);
 insert into client values ('c000000002', 'vincent@gmail.com', 'Vincent van Gogh', '4 B Blue Ridge Blvd', 'Brighton', 48116);
