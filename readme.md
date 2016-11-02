@@ -1,4 +1,5 @@
 <table>
+<tr><th>Date</th><th>Members</th><th>Times</th><th>Tasks</th></tr>
 <tr>
 <td>10/26/16</td>
 <td>Adriana<br />Mark<br />Woodrow</td>
@@ -29,10 +30,11 @@
 </tr>
 <tr>
 <td>11/1/16</td>
-<td>Mark<br /></td>
-<td>8-8:45am</td>
+<td>Mark<br />Adriana</td>
+<td>8pm-8:45am<br />8pm-12am</td>
 <td>
   Cleaning up, fixing little things on the website - broken links, wrong datatypes, double checking for internal consistency.
+  Testing schema, drop script and query.
 </td>
 </tr>
 </table>
