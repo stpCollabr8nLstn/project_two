@@ -84,7 +84,7 @@ CREATE TABLE openHouse (
   openHouseDate DATE NOT NULL,
   openHouseTime VARCHAR2(5) NOT NULL,
   adPublication VARCHAR2(100),
-  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
+  propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL,
   PRIMARY KEY (openHouseId, openHouseDate)
 );
 
