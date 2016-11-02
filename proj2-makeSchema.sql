@@ -21,6 +21,7 @@ DROP TABLE owns                 cascade constraint;
 DROP TABLE clientPhone          cascade constraint;
 DROP TABLE buyer                cascade constraint;
 DROP TABLE buyerLocation        cascade constraint;
+DROP TABLE buyerAmenity         cascade constraint;
 DROP TABLE renter               cascade constraint;
 DROP TABLE owner                cascade constraint;
 DROP TABLE hasA                 cascade constraint;
@@ -122,13 +123,9 @@ CREATE TABLE listing (
   listingId VARCHAR2(10) PRIMARY KEY NOT NULL,
   listingPrice NUMBER(10,2),
   listingDate DATE,
+  rental VARCHAR2(1) CONSTRAINT ck_rental CHECK (rental IN ('y', 'n')) NOT NULL,
+  sale VARCHAR2(1) CONSTRAINT ck_sale CHECK (sale IN ('y', 'n')) NOT NULL,
   propertyId VARCHAR2(10) REFERENCES property(propertyId) NOT NULL
-);
-
-CREATE TABLE listingRentalOrSale (
-  listingId VARCHAR2(10) REFERENCES listing(listingId),
-  rentalOrSale VARCHAR2(1) CONSTRAINT ck_rentalOrSale CHECK (rentalOrSale IN ('r', 's')) NOT NULL,
-  PRIMARY KEY (listingId, rentalOrSale)
 );
 
 CREATE TABLE client (
@@ -155,8 +152,7 @@ CREATE TABLE clientPhone (
 CREATE TABLE buyer (
   clientId VARCHAR2(10) PRIMARY KEY REFERENCES client (clientId),
   minPrice NUMBER(20,2),
-  maxPrice NUMBER(20,2),
-  amenities VARCHAR2(1000)
+  maxPrice NUMBER(20,2)
 );
 
 CREATE TABLE buyerLocation (
@@ -165,6 +161,12 @@ CREATE TABLE buyerLocation (
   city VARCHAR2(25),
   zipCode NUMBER(5),
   PRIMARY KEY (clientId, street)
+);
+
+CREATE TABLE buyerAmenity (
+  clientId VARCHAR2(10) REFERENCES client (clientId),
+  amenity VARCHAR2(100),
+  PRIMARY KEY (clientId, amenity)
 );
 
 CREATE TABLE renter (
@@ -293,24 +295,13 @@ insert into offersMade values ('om00000005', '03-MAR-16', 600000, 'accepted', 'p
 insert into offersMade values ('om00000006', '10-JUN-16', 100000, 'rejected', 'p000000001');
 insert into offersMade values ('om00000007', '17-MAR-16', 200000, 'rejected', 'p000000002');
 
-insert into listing values ('l000000001', 2000000, '17-MAR-16', 'p000000001');
-insert into listing values ('l000000002', 1000000, '01-JUN-15', 'p000000002');
-insert into listing values ('l000000003', 8000000, '12-DEC-15', 'p000000003');
-insert into listing values ('l000000004', 3500000, '03-MAR-16', 'p000000004');
-insert into listing values ('l000000005', 20000000, '06-AUG-15', 'p000000005');
-insert into listing values ('l000000006', 1500000, '10-JAN-16', 'p000000006');
-insert into listing values ('l000000007', 1750000, '17-JUL-15', 'p000000007');
-
-insert into listingRentalOrSale values ('l000000001', 'r');
-insert into listingRentalOrSale values ('l000000001', 's');
-insert into listingRentalOrSale values ('l000000002', 's');
-insert into listingRentalOrSale values ('l000000003', 'r');
-insert into listingRentalOrSale values ('l000000004', 's');
-insert into listingRentalOrSale values ('l000000004', 'r');
-insert into listingRentalOrSale values ('l000000005', 'r');
-insert into listingRentalOrSale values ('l000000006', 's');
-insert into listingRentalOrSale values ('l000000007', 'r');
-insert into listingRentalOrSale values ('l000000007', 's');
+insert into listing values ('l000000001', 2000000, '17-MAR-16', 'y', 'y', 'p000000001');
+insert into listing values ('l000000002', 1000000, '01-JUN-15', 'n', 'y', 'p000000002');
+insert into listing values ('l000000003', 8000000, '12-DEC-15', 'y', 'n', 'p000000003');
+insert into listing values ('l000000004', 3500000, '03-MAR-16', 'y', 'y', 'p000000004');
+insert into listing values ('l000000005', 20000000, '06-AUG-15', 'y', 'n', 'p000000005');
+insert into listing values ('l000000006', 1500000, '10-JAN-16', 'n', 'y', 'p000000006');
+insert into listing values ('l000000007', 1750000, '17-JUL-15', 'y', 'y', 'p000000007');
 
 insert into client values ('c000000001', 'pablo@gmail.com', 'Pablo Picasso', '6649 N Blue Gum St', 'New Orleans', 70116);
 insert into client values ('c000000002', 'vincent@gmail.com', 'Vincent van Gogh', '4 B Blue Ridge Blvd', 'Brighton', 48116);
@@ -348,11 +339,16 @@ insert into clientPhone values ('c000000012', '212-642-4264');
 insert into clientPhone values ('c000000013', '303-462-7245');
 insert into clientPhone values ('c000000014', '404-632-4324');
 insert into clientPhone values ('c000000015', '512-366-6421');
-insert into buyer values ('c000000001', 70000, 200000, 'in-ground pool');
-insert into buyer values ('c000000002', 100000, 500000, '');
-insert into buyer values ('c000000003', 1000000, 10000000, 'helicopter pad, batcave');
-insert into buyer values ('c000000004', 60000, 300000, 'porch swing');
-insert into buyer values ('c000000005', 150000, 8000000, 'near beach');
+insert into buyer values ('c000000001', 70000, 200000);
+insert into buyer values ('c000000002', 100000, 500000);
+insert into buyer values ('c000000003', 1000000, 10000000);
+insert into buyer values ('c000000004', 60000, 300000);
+insert into buyer values ('c000000005', 150000, 8000000);
+insert into buyerAmenities values ('c000000001', 'in-ground pool');
+insert into buyerAmenities values ('c000000003', 'helicopter pad');
+insert into buyerAmenities values ('c000000003', 'batcave');
+insert into buyerAmenities values ('c000000004', 'porch swing');
+insert into buyerAmenities values ('c000000005', 'near beach');
 insert into buyerLocation values ('c000000001', '73 State Road 434 E', 'Phoenix', 85013);
 insert into buyerLocation values ('c000000001', '90991 Thorburn Ave', 'New York', 10011);
 insert into buyerLocation values ('c000000002', '426 Wolf St', 'Jefferson', 70002);
