@@ -1,2 +1,2 @@
-select listingId from listingRentalOrSale where rentalOrSale = 'r' intersect select listingId from listingRentalOrSale where rentalOrSale = 's';
+select listingId from listing where rental = 'y' intersect select listingId from listing where sale = 'y';
 
