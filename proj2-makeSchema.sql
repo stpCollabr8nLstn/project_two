@@ -1,7 +1,8 @@
 --
 --  Creating real estate database
+--	Authors: Adriana Rios, Woodrow Bogucki, Mark McDermott
+--	CS 4332 Fall 2016
 --
-
 set termout on
 set feedback on
 prompt Building real estate database.  Please wait ...
