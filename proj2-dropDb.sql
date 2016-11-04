@@ -1,3 +1,8 @@
+--	
+-- 	Drop Tables
+--	Authors: Adriana Rios, Woodrow Bogucki, Mark McDermott
+-- 	CS 4332 Fall 2016
+--
 DROP TABLE staffPhone           cascade constraint;
 DROP TABLE staffAddress         cascade constraint;
 DROP TABLE sellingAgent         cascade constraint;
